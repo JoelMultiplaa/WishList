@@ -13,6 +13,15 @@ public class Wish {
     }
 
     public String getName(){
+        return name;
+    }
+
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
         return description;
     }
 
@@ -20,6 +29,12 @@ public class Wish {
         this.name = name;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }
+
