@@ -1,4 +1,4 @@
-package com.example.wishlist.service;
+package com.example.wishlist;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
