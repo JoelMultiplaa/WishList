@@ -4,11 +4,15 @@ public class Wish {
     private String name;
     private String description;
     private int price;
+    private int password;
+    private  String id;
 
-    public Wish(String name, String description, int price) {
+    public Wish(String name, String description, int price, int password, String id) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.password = password;
+        this.id = id;
 
     }
 
