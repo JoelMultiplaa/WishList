@@ -5,6 +5,7 @@ import com.example.wishlist.service.WishListService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -22,6 +23,7 @@ public class WishListController {
         model.addAttribute("user", new Object());
         return "home";
     }
+
 
     // Create endpoint
     @PostMapping("")
@@ -45,4 +47,11 @@ public class WishListController {
     }
 }
 
+   /* @GetMapping
+    public List<Wish> getWish(Model model) {
+        List<Wish> wishes = WishListService.getAllWishes();
+        return wishes;
+    }
+}
+*/
 
