@@ -1,5 +1,6 @@
 package com.example.wishlist.controller;
 
+import com.example.wishlist.model.User;
 import com.example.wishlist.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,25 @@ public class UserController {
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+@GetMapping("/regsister")
+public String showregister() {
+        return "register";
+}
 
+@PostMapping("/register")
+public String register(@RequestParam("username") String username,
+    @RequestParam("password") String password,
+    Model model) {
+        User newUser = new User(username, password);
+        boolean added = userRepository.addUSer(newUser);
+        if(added) {
+            return "redirect:/login"; //Brugeren blev oprettet, redirect til login-siden
 
+        } else {
+            model.addAttribute("error","Username already exist");
+            return "register"; //Brugeren eksistere allerde, vis registreringsside
+        }
+}
 
 
     @GetMapping("/login")
@@ -39,5 +57,7 @@ public class UserController {
             model.addAttribute("error", "Invalid username or password");
             return "login"; // Vis login-formularen igen
         }
+
+
     }
 }
