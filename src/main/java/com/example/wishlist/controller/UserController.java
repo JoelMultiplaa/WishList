@@ -55,7 +55,7 @@ public String register(@RequestParam("username") String username,
         } else {
             // Hvis login mislykkes, vis en fejlbesked til brugeren på login-siden
             model.addAttribute("error", "Invalid username or password");
-            return "login"; // Vis login-formularen igen
+            return "redirect:/login"; // Vis login-formularen igen
         }
 
 

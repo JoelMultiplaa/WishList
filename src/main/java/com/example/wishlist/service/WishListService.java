@@ -11,10 +11,12 @@ public class WishListService {
     private WishRepository wishRepository;
 
     public List<Wish> getAllWishes() {
+
         return wishRepository.getAllWishes();
     }
 
     public Wish getWishById(int id) {
+
         return wishRepository.getWishById(id);
     }
 
@@ -29,6 +31,7 @@ public class WishListService {
     }
 
     public void deleteWish(int id) {
+
         wishRepository.deleteWish(id);
     }
 }

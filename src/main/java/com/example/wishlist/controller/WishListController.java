@@ -47,4 +47,11 @@ public class WishListController {
     }
 }
 
+   /* @GetMapping
+    public List<Wish> getWish(Model model) {
+        List<Wish> wishes = WishListService.getAllWishes();
+        return wishes;
+    }
+}
+*/
 

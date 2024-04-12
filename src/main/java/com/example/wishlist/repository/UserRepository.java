@@ -37,7 +37,7 @@ public class UserRepository {
 //        return false;
     }
 
-    public boolean login(String id, String password){
+    public boolean login(String username, String password){
         // Implementer logik til at validere brugerens loginoplysninger
         // Returner true, hvis loginoplysningerne er korrekte, ellers returner false
         return true;
