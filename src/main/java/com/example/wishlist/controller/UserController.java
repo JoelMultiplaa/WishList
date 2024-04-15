@@ -25,7 +25,7 @@ public String showregister() {
 
 @PostMapping("/register")
 public String register(@RequestParam("username") String username,
-    @RequestParam("password") String password,
+    @RequestParam("password") String password,HttpSession session,
     Model model) {
         User newUser = new User(username, password);
         boolean added = userRepository.addUSer(newUser);
@@ -34,7 +34,7 @@ public String register(@RequestParam("username") String username,
 
         } else {
             model.addAttribute("error","Username already exist");
-            return "register"; //Brugeren eksistere allerde, vis registreringsside
+            return "redirect:/register"; //Brugeren eksistere allerde, vis registreringsside
         }
 }
 
