@@ -5,39 +5,34 @@ import com.example.wishlist.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
+
+
+
 
 @Controller
 public class UserController {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-@GetMapping("/register")
-public String showregister() {
+
+    @GetMapping("/register")
+    public String showRegister(){
         return "register";
-}
+    }
 
-@PostMapping("/register")
-public String register(@RequestParam("username") String username,
-    @RequestParam("password") String password,HttpSession session,
-    Model model) {
-        User newUser = new User(username, password);
-        boolean added = userRepository.addUSer(newUser);
-        if(added) {
+    @PostMapping("/register")
+    public String register(@ModelAttribute("user") User user, Model model) {
+        boolean added = userRepository.addUser(user);
+        if (added) {
             return "redirect:/login"; //Brugeren blev oprettet, redirect til login-siden
-
         } else {
-            model.addAttribute("error","Username already exist");
-            return "redirect:/register"; //Brugeren eksistere allerde, vis registreringsside
+            model.addAttribute("error", "Username already exists");
+            return "register"; //Brugeren eksisterer allerede, vis registreringsside igen med fejlmeddelelse
         }
-}
-
+    }
 
     @GetMapping("/login")
     public String showLogin() {
@@ -60,7 +55,5 @@ public String register(@RequestParam("username") String username,
             model.addAttribute("error", "Invalid username or password");
             return "redirect:/login"; // Vis login-formularen igen
         }
-
-
     }
 }

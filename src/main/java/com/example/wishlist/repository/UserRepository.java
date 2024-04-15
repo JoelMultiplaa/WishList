@@ -9,38 +9,31 @@ import java.util.List;
 @Repository
 public class UserRepository {
 
-    private List<User> users = new ArrayList<>();
+    private final List<User> users = new ArrayList<>();
 
-          public UserRepository () {
-             users.add(new User("Joel", "hemmelighed"));
-             users.add(new User("Berzan", "bibloteket"));
-             users.add(new User("Ali", "mazza"));
-          }
-
-          public boolean addUSer (User user) {
-              //tjek om brugernavnet allerede eksiterer
-              for(User existingUser : users) {
-                  if(existingUser.getUsername().equals(user.getUsername())){
-                      return false; //brugeren findes allerede
-
-                  }
-              }
-              //tilføj den nye bruger
-              users.add(user);
-              return true; //Brugeren bliver tilføjet
-//
-//          public boolean getUser(String username) {
-//        for (User user:users) {
-//            if(user.getUsername().equals(username))
-//                return true;
-//        }
-//        return false;
+    public UserRepository() {
+        // Tilføj nogle startbrugere til listen (bare til testformål)
+        users.add(new User("Joel", "Darko", "Joel17", "joel@hotmail.com", "1990-01-01", "1111111"));
+        users.add(new User("Berzan", "Savuran", "Berzan20", "b@hotmail.com", "1985-05-15", "654321"));
+        users.add(new User("Ali", "Hussain", "Ali17", "ali@hotmail.com", "1988-10-25", "123456"));
     }
 
-    public boolean login(String username, String password){
+    public boolean addUser(User user) {
+        // Kontroller, om brugernavnet allerede eksisterer
+        for (User existingUser : users) {
+            if (existingUser.getUsername().equals(user.getUsername())) {
+                return false; // Brugeren findes allerede
+            }
+        }
+        // Tilføj den nye bruger
+        users.add(user);
+        return true; // Brugeren blev tilføjet
+    }
+
+    public boolean login(String username, String password) {
         // Implementer logik til at validere brugerens loginoplysninger
         // Returner true, hvis loginoplysningerne er korrekte, ellers returner false
-        return true;
+        // Her kan du tilføje kode til at tjekke brugernavn og adgangskode mod din database eller anden lagring
+        return true; // Simulerer en succesfuld login - du skal implementere den faktiske logik
     }
-
 }
