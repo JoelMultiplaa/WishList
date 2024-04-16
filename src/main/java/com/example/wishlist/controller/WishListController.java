@@ -2,19 +2,26 @@ package com.example.wishlist.controller;
 import com.example.wishlist.model.Wish;
 import com.example.wishlist.repository.WishRepository;
 import com.example.wishlist.service.WishListService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class WishListController {
     private WishListService wishListService;
 
+
+
+
     public WishListController(WishListService wishListService) {
         this.wishListService = wishListService;
+
     }
 
-    private WishRepository wishRepository;
 
     @GetMapping("/Home")
     public String home(Model model) {
@@ -23,51 +30,32 @@ public class WishListController {
     }
 
 
-    // Vis alle ønsker
-    @GetMapping("/wishes")
-    public String showAllWishes(Model model) {
-        model.addAttribute("wishes", wishListService.getAllWishes());
-        return "wishes";
-    }
-
-    // Vis form til oprettelse af et nyt ønske
-    /*@GetMapping("/wishes/new")
-    public String showCreateWishForm(Model model) {
-        model.addAttribute("wish", new Wish());
-        return "create-wish";
-    }*/
-
-    // Opret et nyt ønske
-    @PostMapping("/wishes")
+    // Create endpoint
+    @PostMapping("/create")
     public String createWish(@ModelAttribute("wish") Wish wish) {
         wishListService.createWish(wish);
         return "redirect:/wishes";
     }
 
-    // Vis form til redigering af et ønske
-    @GetMapping("/wishes/{id}/edit")
-    public String showEditWishForm(@PathVariable int id, Model model) {
+    @GetMapping("/read/{id}")
+    public String getWish(@PathVariable("id") int id, Model model) {
         Wish wish = wishListService.getWishById(id);
-        if (wish == null) {
-            return "redirect:/wishes";
-        }
         model.addAttribute("wish", wish);
-        return "edit-wish";
+        return "wish_details"; // Opret en ønskevisningsside
     }
 
-    // Rediger et ønske
-    @PutMapping("/wishes/{id}")
-    public String editWish(@PathVariable int id, @ModelAttribute("updatedWish") Wish updatedWish) {
+    @PostMapping("/update/{id}")
+    public String updateWish(@PathVariable("id") int id, @ModelAttribute("updatedWish") Wish updatedWish) {
         wishListService.updateWish(id, updatedWish);
         return "redirect:/wishes";
     }
 
-    // Slet et ønske
-    @DeleteMapping("/wishes/{id}")
-    public String deleteWish(@PathVariable int id) {
+    @PostMapping("/delete/{id}")
+    public String deleteWish(@PathVariable("id") int id) {
         wishListService.deleteWish(id);
         return "redirect:/wishes";
     }
 }
+
 
 

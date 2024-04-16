@@ -22,7 +22,7 @@ public class WishListService {
 
     public void createWish(Wish wish) {
         // Implementer eventuel validering af ønsket før oprettelse
-         wishRepository.createWish(wish);
+        wishRepository.createWish(wish);
     }
 
     public Wish updateWish(int id, Wish updatedWish) {

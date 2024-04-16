@@ -1,5 +1,7 @@
 package com.example.wishlist.model;
 
+import java.util.Date;
+
 public class User {
     private String firstname;
     private String username;
@@ -22,22 +24,17 @@ public class User {
     }
 
     public String getUsername() {
-
         return username;
     }
 
     public void setDob(String username) {
-
         this.username = username;
     }
-
     public String getPassword() {
-
         return password;
     }
 
     public void setPassword(String password) {
-
         this.password = password;
     }
 }
