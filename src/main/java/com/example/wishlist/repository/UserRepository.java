@@ -13,9 +13,9 @@ public class UserRepository {
 
     public UserRepository() {
         // Tilføj nogle startbrugere til listen (bare til testformål)
-        users.add(new User("Joel", "Darko", "Joel17", "joel@hotmail.com", "1990-01-01", "1111111"));
-        users.add(new User("Berzan", "Savuran", "Berzan20", "b@hotmail.com", "1985-05-15", "654321"));
-        users.add(new User("Ali", "Hussain", "Ali17", "ali@hotmail.com", "1988-10-25", "123456"));
+        users.add(new User("Joel", "Darko", "Joel17"));
+        users.add(new User("Berzan", "Savuran", "Berzan20"));
+        users.add(new User("Ali", "Hussain", "Ali17"));
     }
 
     public boolean addUser(User user) {

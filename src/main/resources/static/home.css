@@ -59,6 +59,8 @@ body {
 .slideshow-container {
     margin-top: 80px;
     position: relative;
+    max-width: 800px; /* Tilføjet en maksimal bredde */
+    margin: 0 auto; /* Centrerer containeren på siden */
 }
 
 .mySlides img {
@@ -73,9 +75,10 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    text-align: center;
+    text-align: justify; /* Ændret text-align til justify */
     font-size: 20px;
     font-style: italic;
+    max-width: 90%; /* Tilføjet en maksimal bredde */
 }
 
 .fade {
