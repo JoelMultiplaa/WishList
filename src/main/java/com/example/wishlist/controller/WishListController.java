@@ -1,5 +1,7 @@
 package com.example.wishlist.controller;
 import com.example.wishlist.model.Wish;
+import com.example.wishlist.model.WishList;
+import com.example.wishlist.repository.WishRepository;
 import com.example.wishlist.service.WishListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,13 @@ public class WishListController {
         return "createWish"; // Opret en side for oprettelse af ønske
     }
 
+
+    // Create endpoint
+    @PostMapping("/createwish")
+    public String createWish(@ModelAttribute("wish") Wish wish) {
+        wishListService.createWish(wish);
+        return "createWish";
+
     // Opret ønske endpoint
     @PostMapping("/createwish")
     public String createWish(@ModelAttribute("wish") Wish wish) {
@@ -47,6 +56,7 @@ public class WishListController {
     public String showCreateWishForm(Model model) {
         model.addAttribute("wish", new Wish());
         return "create_wish"; // Opret en side for oprettelse af ønske
+
     }
 
     @GetMapping("/read/{id}")
@@ -66,5 +76,24 @@ public class WishListController {
     public String deleteWish(@PathVariable("id") int id) {
         wishListService.deleteWish(id);
         return "redirect:/wishes";
+    }
+
+    //Create endpoints til wishlist
+    @PostMapping("/createwishlist")
+    public String createWishList(@ModelAttribute("newWishList") WishList wishList) {
+        wishListService.createWishList(wishList);
+        return "redirect:/wishlists";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateWishList(@PathVariable int id, @ModelAttribute("updatedWishList") WishList updatedWishList) {
+        wishListService.updateWishList(id, updatedWishList);
+        return "redirect:/wishlists";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteWishList(@PathVariable int id) {
+        wishListService.deleteWishList(id);
+        return "redirect:/wishlists";
     }
 }
