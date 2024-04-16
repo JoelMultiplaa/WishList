@@ -1,7 +1,6 @@
 package com.example.wishlist.service;
 import com.example.wishlist.model.Wish;
 import com.example.wishlist.repository.WishRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
