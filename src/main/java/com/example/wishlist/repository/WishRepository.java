@@ -76,6 +76,7 @@ public class WishRepository {
         }
         return newWish;
     }
+
     private List<WishList> wishLists = new ArrayList<>();
 
     public List<WishList> getAllWishLists() {
@@ -100,3 +101,4 @@ public class WishRepository {
     }
 
 }
+

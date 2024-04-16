@@ -9,9 +9,6 @@ import java.util.List;
 public class WishListService {
 
     private WishRepository wishRepository;
-    public WishListService(WishRepository wishRepository) { // Brug WishRepository i stedet for WishListRepository
-        this.wishRepository = wishRepository;
-    }
 
 
     public List<Wish> getAllWishes() {
@@ -39,7 +36,7 @@ public class WishListService {
         wishRepository.deleteWish(id);
     }
 
-//WishList kode
+
 
 
     public void createWishList(WishList wishList) {
