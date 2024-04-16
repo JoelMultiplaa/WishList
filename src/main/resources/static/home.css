@@ -1,17 +1,9 @@
-/* Reset CSS */
-* {
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    color: #333;
 }
 
-/* Header styling */
 .header {
     background-color: #0056b3;
     color: #fff;
@@ -23,7 +15,6 @@ body {
     font-size: 24px;
 }
 
-/* Menu styling */
 .menu-box {
     position: fixed;
     top: 20px;
@@ -42,6 +33,10 @@ body {
     margin-left: 10px;
 }
 
+.menu-box nav ul li:first-child {
+    margin-left: 0;
+}
+
 .menu-box nav ul li a {
     text-decoration: none;
     color: #fff;
@@ -55,15 +50,12 @@ body {
     background-color: #004080;
 }
 
-/* Slideshow styling */
 .slideshow-container {
-    margin-top: 80px;
     position: relative;
-    max-width: 800px; /* Tilføjet en maksimal bredde */
-    margin: 0 auto; /* Centrerer containeren på siden */
+    overflow: hidden;
 }
 
-.mySlides img {
+.slideshow-container img {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -72,21 +64,14 @@ body {
 .image-text {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 20px;
+    transform: translateY(-50%);
     color: white;
-    text-align: justify; /* Ændret text-align til justify */
+    z-index: 1;
     font-size: 20px;
     font-style: italic;
-    max-width: 90%; /* Tilføjet en maksimal bredde */
 }
 
-.fade {
-    opacity: 1;
-    transition: opacity 1s;
-}
-
-/* Footer styling */
 .footer {
     background-color: #333;
     color: #fff;
