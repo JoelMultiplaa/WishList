@@ -1,5 +1,6 @@
 package com.example.wishlist.controller;
 import com.example.wishlist.model.Wish;
+import com.example.wishlist.model.WishList;
 import com.example.wishlist.service.WishListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,5 +67,13 @@ public class WishListController {
     public String deleteWish(@PathVariable("id") int id) {
         wishListService.deleteWish(id);
         return "redirect:/wishes";
+    }
+
+
+    // Opret ønskeliste side (endpoint som virker
+    @GetMapping("/createwishlist")
+    public String createWishListPage(Model model) {
+        model.addAttribute("wishList", new WishList());
+        return "createwishlist";
     }
 }

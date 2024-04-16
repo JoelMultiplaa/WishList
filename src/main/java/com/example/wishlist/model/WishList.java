@@ -20,6 +20,10 @@ public class WishList {
 
     }
 
+    public WishList() {
+
+    }
+
     // Getters and Setters
 
     public String getName() {
