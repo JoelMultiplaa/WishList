@@ -8,15 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class WishListController {
     private WishListService wishListService;
 
+
+
+
     public WishListController(WishListService wishListService) {
         this.wishListService = wishListService;
+
     }
 
-    private WishRepository wishRepository;
 
     @GetMapping("/Home")
     public String home(Model model) {
@@ -26,32 +31,31 @@ public class WishListController {
 
 
     // Create endpoint
-    @PostMapping("")
+    @PostMapping("/create")
     public String createWish(@ModelAttribute("wish") Wish wish) {
         wishListService.createWish(wish);
         return "redirect:/wishes";
     }
 
-    // Delete endpoint
-    @DeleteMapping("/{id}")
-    public String deleteWish(@PathVariable int id) {
-        wishListService.deleteWish(id);
-        return "redirect:/wishes";
+    @GetMapping("/read/{id}")
+    public String getWish(@PathVariable("id") int id, Model model) {
+        Wish wish = wishListService.getWishById(id);
+        model.addAttribute("wish", wish);
+        return "wish_details"; // Opret en ønskevisningsside
     }
 
-    // Edit endpoint
-    @PutMapping("/{id}")
-    public String editWish(@PathVariable int id, @ModelAttribute("updatedWish") Wish updatedWish) {
+    @PostMapping("/update/{id}")
+    public String updateWish(@PathVariable("id") int id, @ModelAttribute("updatedWish") Wish updatedWish) {
         wishListService.updateWish(id, updatedWish);
         return "redirect:/wishes";
     }
-}
 
-   /* @GetMapping
-    public List<Wish> getWish(Model model) {
-        List<Wish> wishes = WishListService.getAllWishes();
-        return wishes;
+    @PostMapping("/delete/{id}")
+    public String deleteWish(@PathVariable("id") int id) {
+        wishListService.deleteWish(id);
+        return "redirect:/wishes";
     }
 }
-*/
+
+
 

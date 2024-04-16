@@ -66,7 +66,7 @@ public class WishRepository {
 
     public Wish createWish(Wish newWish) {
         try (Connection con = DriverManager.getConnection(url, user_id, user_pwd)){
-            String SQL = "INSERT INTO WishList (NAME, DESCRIPTION, PRICE) VALUES(?,?, ?)";
+            String SQL = "INSERT INTO WishList (NAME, DESCRIPTION, PRICE) VALUES(?,?,?)";
             PreparedStatement pstmt  = con.prepareStatement(SQL);
             pstmt.setString(1, newWish.getName());
             pstmt.setString(2, newWish.getDescription());
