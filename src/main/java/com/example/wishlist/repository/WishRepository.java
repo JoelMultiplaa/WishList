@@ -59,7 +59,7 @@ public class WishRepository {
         wishes.removeIf(w -> w.getId() == id);
     }
 
-    public void createWish(Wish newWish) {
+    public Wish createWish(Wish newWish) {
         try (Connection con = DriverManager.getConnection(url, user_id, user_pwd)){
             String SQL = "INSERT INTO WishList (NAME, DESCRIPTION, PRICE) VALUES(?,?,?)";
             PreparedStatement pstmt  = con.prepareStatement(SQL);
@@ -73,5 +73,6 @@ public class WishRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return newWish;
     }
 }
