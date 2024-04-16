@@ -1,16 +1,23 @@
 body {
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
-    background-color: red;
+    background-color: #f0f0f0;
 }
 
 .register-container {
-    width: 400px;
+    max-width: 400px;
     margin: 50px auto;
     padding: 30px;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
 }
 
 .form-group {
@@ -21,12 +28,11 @@ label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
+    color: #555;
 }
 
 input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="date"] {
+input[type="password"] {
     width: calc(100% - 22px);
     padding: 10px;
     border: 1px solid #ccc;
@@ -35,25 +41,36 @@ input[type="date"] {
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus,
-input[type="date"]:focus {
+input[type="password"]:focus {
     outline: none;
     border-color: #5cb85c;
 }
 
-button {
-    width: 100%;
+button[type="submit"],
+button[type="button"] {
+    width: calc(50% - 5px);
     padding: 12px;
-    background-color: #5cb85c;
     border: none;
     border-radius: 4px;
-    color: white;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
-button:hover {
+button[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+}
+
+button[type="submit"]:hover {
     background-color: #4cae4c;
+}
+
+button[type="button"] {
+    background-color: #ffc107;
+    color: white;
+}
+
+button[type="button"]:hover {
+    background-color: #ff9800;
 }

@@ -9,6 +9,7 @@ public class WishListService {
 
     private WishRepository wishRepository;
 
+
     public List<Wish> getAllWishes() {
 
         return wishRepository.getAllWishes();

@@ -1,11 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #0056b3;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.header h1 {
+    font-size: 24px;
+}
+
 .menu-box {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 20px;
+    right: 20px;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
 }
 
 .menu-box nav ul {
@@ -16,52 +30,64 @@
 
 .menu-box nav ul li {
     display: inline;
-    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.menu-box nav ul li:first-child {
+    margin-left: 0;
 }
 
 .menu-box nav ul li a {
     text-decoration: none;
-    color: white;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #0056b3;
+    transition: background-color 0.3s ease;
 }
 
-nav ul li a:hover {
-    background-color: #0056b3;
-    color: white;
+.menu-box nav ul li a:hover {
+    background-color: #004080;
 }
 
 .slideshow-container {
-    margin-top: 50px;
-    position: relative; /* Tilføjet */
-}
-
-.video-container {
     position: relative;
-    height: 100vh;
     overflow: hidden;
 }
 
-.mySlides img {
+.slideshow-container img {
     width: 100%;
     height: auto;
-    max-width: 100%;
     object-fit: cover;
-    position: absolute; /* Tilføjet */
-    top: 0; /* Tilføjet */
-    left: 0; /* Tilføjet */
 }
 
 .image-text {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: blue; /* Ændret til hvid */
+    left: 20px;
+    transform: translateY(-50%);
+    color: white;
     z-index: 1;
-    font-size: 50px;
+    font-size: 20px;
     font-style: italic;
 }
 
-.fade {
-    opacity: 1;
-    transition: opacity 1s;
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.contact-info {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-info h2 {
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    margin: 5px 0;
 }
