@@ -42,11 +42,6 @@ public class WishRepository {
         return wishOptional.orElse(null);
     }
 
-   /* public Wish createWish(Wish wish) {
-        // Tilføj det nye ønske til listen
-        wishes.add(wish);
-        return wish;
-    }*/
 
     public Wish updateWish(int id, Wish updatedWish) {
         // Find og opdater det ønskede ønske
