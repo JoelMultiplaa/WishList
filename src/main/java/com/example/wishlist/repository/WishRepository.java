@@ -1,7 +1,6 @@
 
 package com.example.wishlist.repository;
 
-import com.example.wishlist.model.WishList;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -61,9 +60,9 @@ public class WishRepository {
     }
 
     public Wish createWish(Wish newWish) {
-        try (Connection con = DriverManager.getConnection(url, user_id, user_pwd)){
+        try (Connection con = DriverManager.getConnection(url, user_id, user_pwd)) {
             String SQL = "INSERT INTO WishList (NAME, DESCRIPTION, PRICE) VALUES(?,?,?)";
-            PreparedStatement pstmt  = con.prepareStatement(SQL);
+            PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setString(1, newWish.getName());
             pstmt.setString(2, newWish.getDescription());
             pstmt.setInt(3, newWish.getPrice());
@@ -77,28 +76,4 @@ public class WishRepository {
         return newWish;
     }
 
-    private List<WishList> wishLists = new ArrayList<>();
-
-    public List<WishList> getAllWishLists() {
-        return wishLists;
-    }
-
-    public void createWishList(WishList newWishList) {
-        wishLists.add(newWishList);
-    }
-
-    public void updateWishList(int id, WishList updatedWishList) {
-        for (int i = 0; i < wishLists.size(); i++) {
-            if (wishLists.get(i).getWishListId() == id) {
-                wishLists.set(i, updatedWishList);
-                break;
-            }
-        }
-    }
-
-    public void deleteWishList(int id) {
-        wishLists.removeIf(w -> w.getWishListId() == id);
-    }
-
 }
-
