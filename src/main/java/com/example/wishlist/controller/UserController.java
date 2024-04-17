@@ -16,12 +16,14 @@ public class UserController {
 
     @GetMapping("/register")
     public String showRegister(){
+
         return "register";
     }
 
     @PostMapping("/register")
     public String register(@ModelAttribute("user") User user, Model model) {
         boolean added = userRepository.addUser(user);
+        System.out.println("Test12");
         if (added) {
             return "redirect:/login"; //Brugeren blev oprettet, redirect til login-siden
         } else {
@@ -32,24 +34,25 @@ public class UserController {
 
     @GetMapping("/login")
     public String showLogin() {
+
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("id") String username,
-                        @RequestParam("password") String password,
+    public String login(@ModelAttribute("user") User user,
                         HttpSession session,
                         Model model) {
         // Kontroller, om brugeren er logget ind ved at kalde login-metoden fra userRepository
-        if (userRepository.login(username, password)) {
+        System.out.println("test");
+        if (userRepository.login(user.getUsername(), user.getPassword())) {
             // Opretter en session for brugeren og sæt session timeout til 30 sekunder
-            session.setAttribute("user", username);
+            session.setAttribute("user", user.getUsername());
             session.setMaxInactiveInterval(30); // Angiv session timeout til 30 sekunder
-            return "redirect:/"; // Redirect til startsiden
+            return "redirect:/wishlist_frontpage"; // Redirect til startsiden
         } else {
             // Hvis login mislykkes, vis en fejlbesked til brugeren på login-siden
             model.addAttribute("error", "Invalid username or password");
-            return "redirect:/login"; // Vis login-formularen igen
+            return ""; // Vis login-formularen igen
         }
     }
 }
