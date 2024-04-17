@@ -15,10 +15,17 @@ public class WishListController {
         this.wishListService = wishListService;
     }
 
-    @GetMapping("/Home")
+    @GetMapping("/home")
     public String home(Model model) {
         model.addAttribute("user", new Object());
         return "home";
+    }
+    @GetMapping("/wishlist_frontpage")
+    public String showWishListFrontpage(Model model) {
+        // Implementer logikken til at hente ønskelister fra backenden og sende dem til HTML-siden
+        List<WishList> wishLists = wishListService.getAllWishLists();
+        model.addAttribute("wishLists", wishLists);
+        return "wishlist_frontpage"; //
     }
 
     // Opret ønskeside
@@ -76,4 +83,42 @@ public class WishListController {
         model.addAttribute("wishList", new WishList());
         return "createwishlist";
     }
+
+    // Opret ønskeliste endpoint
+    @PostMapping("/createwishlist")
+    public String createWishList(@ModelAttribute("wishList") WishList wishList) {
+        wishListService.createWishList(wishList);
+        return "redirect:/wishlists"; // Omdiriger til ønskeliste-siden efter oprettelse
+    }
+
+    // Slet ønskeliste endpoint
+    @PostMapping("/deletewishlist/{id}")
+    public String deleteWishList(@PathVariable("id") int id) {
+        wishListService.deleteWishList(id);
+        return "redirect:/wishlists";
+    }
+
+    // Rediger ønskeliste side
+    /*@GetMapping("/editwishlist/{id}")
+    public String editWishListPage(@PathVariable("id") int id, Model model) {
+        WishList wishList = wishListService.getWishListById(id);
+        model.addAttribute("wishList", wishList);
+        return "edit_wishlist"; // Opret en side for redigering af ønskeliste
+    }*/
+
+    // Opdater ønskeliste endpoint
+    @PostMapping("/editwishlist/{id}")
+    public String updateWishList(@PathVariable("id") int id, @ModelAttribute("wishList") WishList updatedWishList) {
+        wishListService.updateWishList(id, updatedWishList);
+        return "redirect:/wishlists";
+    }
+
+    // Vis alle ønskelister endpoint
+    @GetMapping("/wishlists")
+    public String showAllWishLists(Model model) {
+        List<WishList> wishLists = wishListService.getAllWishLists();
+        model.addAttribute("wishLists", wishLists);
+        return "wish_list"; // Opret en side for visning af ønskelister
+    }
 }
+

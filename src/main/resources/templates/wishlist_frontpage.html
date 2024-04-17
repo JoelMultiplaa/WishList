@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist Frontpage</title>
+    <!-- Tilføj eventuelle eksterne CSS-stilarter her -->
+    <style>
+        /* Tilføj eventuelle brugerdefinerede stilarter her */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button-group {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .button-group button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+        .button-group button.add {
+            background-color: #28a745;
+            color: white;
+        }
+        .button-group button.add:hover {
+            background-color: #218838;
+        }
+        .button-group button.edit {
+            background-color: #007bff;
+            color: blue;
+        }
+        .button-group button.edit:hover {
+            background-color: #0056b3;
+        }
+        .button-group button.delete {
+            background-color: #dc3545;
+            color: red;
+        }
+        .button-group button.delete:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Wishlist Frontpage</h1>
+
+    <!-- Knapper til at tilføje en ny ønskeliste -->
+    <div class="button-group">
+        <button class="add" onclick="location.href='/createwishlist'">Tilføj ønskeliste</button>
+    </div>
+
+    <!-- Tabel til visning af ønskelister -->
+    <table>
+        <thead>
+        <tr>
+            <th>Wishlist ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Rediger</th>
+            <th>Slet</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Her kan du indsætte dynamisk genereret HTML for hver ønskeliste -->
+        <!-- For eksempel: -->
+        <tr>
+            <td>1</td>
+            <td>Birthday Wishlist</td>
+            <td>A wishlist for my birthday</td>
+            <td>
+                <button class="edit" onclick="location.href='/editwishlist/1'">Rediger</button>
+            </td>
+            <td>
+                <form action="/deletewishlist/1" method="post">
+                    <button class="delete" type="submit">Slet</button>
+                </form>
+            </td>
+        </tr>
+        <!-- Gentag dette mønster for hver ønskeliste -->
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
