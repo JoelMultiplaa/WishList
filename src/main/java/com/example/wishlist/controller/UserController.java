@@ -1,10 +1,14 @@
 package com.example.wishlist.controller;
+
 import com.example.wishlist.model.User;
 import com.example.wishlist.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+
+
 
 @Controller
 public class UserController {
@@ -22,6 +26,7 @@ public class UserController {
     @PostMapping("/register")
     public String register(@ModelAttribute("user") User user, Model model) {
         boolean added = userRepository.addUser(user);
+        System.out.println("test12");
         if (added) {
             return "redirect:/login"; //Brugeren blev oprettet, redirect til login-siden
         } else {
@@ -36,20 +41,20 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("id") String username,
-                        @RequestParam("password") String password,
+    public String login(@ModelAttribute("user") User user,
                         HttpSession session,
                         Model model) {
         // Kontroller, om brugeren er logget ind ved at kalde login-metoden fra userRepository
-        if (userRepository.login(username, password)) {
+            System.out.println("test");
+        if (userRepository.login(user.getUsername(), user.getPassword())) {
             // Opretter en session for brugeren og sæt session timeout til 30 sekunder
-            session.setAttribute("user", username);
+            session.setAttribute("user", user.getUsername());
             session.setMaxInactiveInterval(30); // Angiv session timeout til 30 sekunder
-            return "redirect:/"; // Redirect til startsiden
+            return "redirect:/wishlist_frontpage"; // Redirect til startsiden
         } else {
             // Hvis login mislykkes, vis en fejlbesked til brugeren på login-siden
             model.addAttribute("error", "Invalid username or password");
-            return "redirect:/login"; // Vis login-formularen igen
+            return ""; // Vis login-formularen igen
         }
     }
 }

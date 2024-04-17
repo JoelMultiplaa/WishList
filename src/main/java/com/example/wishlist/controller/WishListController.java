@@ -81,7 +81,7 @@ public class WishListController {
     @GetMapping("/createwishlist")
     public String createWishListPage(Model model) {
         model.addAttribute("wishList", new WishList());
-        return "createwishlist";
+        return "createWishList";
     }
 
     // Opret ønskeliste endpoint
