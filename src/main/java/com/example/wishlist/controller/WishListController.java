@@ -88,14 +88,14 @@ public class WishListController {
     @PostMapping("/createwishlist")
     public String createWishList(@ModelAttribute("wishList") WishList wishList) {
         wishListService.createWishList(wishList);
-        return "redirect:/wishlists"; // Omdiriger til ønskeliste-siden efter oprettelse
+        return "redirect:/wishlist_frontpage"; // Omdiriger til ønskeliste-siden efter oprettelse
     }
 
     // Slet ønskeliste endpoint
     @PostMapping("/deletewishlist/{id}")
     public String deleteWishList(@PathVariable("id") int id) {
         wishListService.deleteWishList(id);
-        return "redirect:/wishlists";
+        return "redirect:/wishlists_frontpage";
     }
 
     // Rediger ønskeliste side
