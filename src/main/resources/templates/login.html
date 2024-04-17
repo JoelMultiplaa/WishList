@@ -1,9 +1,28 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="login.css">
+    <style>
+        .btn-register {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px; /* Tilføjet for at adskille knapperne */
+        }
+
+        .btn-cancel {
+            background-color: yellow;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 <div class="login-container">
@@ -20,9 +39,10 @@
         <div class="form-group" th:if="${error}">
             <p th:text="${error}" style="color: red;"></p>
         </div>
-        <button type="submit" onclick="window.location.href='/wishlist_frontpage';">Login</button>
-
-        <button type="button" onclick="window.location.href='/home';">Tilbage</button>
+        <div class="form-group">
+            <a  th:href="@{/wishlist_frontpage}" type="submit" class="btn-register">Login</a>
+            <a th:href="@{/home}" class="btn-cancel">Tilbage</a>
+        </div>
     </form>
 </div>
 </body>

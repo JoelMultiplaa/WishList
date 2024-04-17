@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Wishlist {
+
+    private int user_id;
     private int wishListId;
     private String name;
     private String description;
@@ -11,18 +13,25 @@ public class Wishlist {
 
 
     // Constructor
-    public Wishlist(String name, String description, int wishListId) {
+    public Wishlist(String name, String description, int wishListId, int user_id) {
 
         this.name = name;
         this.description = description;
         this.wishListId = wishListId;
         this.wishList = new ArrayList<>();
+        this.user_id = user_id;
 
     }
 
     public Wishlist() {
 
     }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+
 
     public String getName() {
 
@@ -37,6 +46,11 @@ public class Wishlist {
     public void setName(String name) {
 
         this.name = name;
+    }
+
+    public void setUser_id(int user_id) {
+
+        this.user_id = user_id;
     }
 
     public void setWishListId(int wishListId) {
@@ -60,5 +74,15 @@ public class Wishlist {
 
     public void setWishList(List<Wish> wishList) {
         this.wishList = wishList;
+    }
+
+    @Override
+    public String toString() {
+        return "Wishlist{" +
+                "wishListId=" + wishListId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", wishList=" + wishList +
+                '}';
     }
 }

@@ -1,46 +1,52 @@
--- Create database
-CREATE DATABASE my_wishlist_database;
-USE my_wishlist_database;
+DROP DATABASE IF EXISTS wishlist;
+CREATE DATABASE wishlist;
+USE wishlist;
 
--- Create tables
-CREATE TABLE IF NOT EXISTS Users(
-USER_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-USERNAME VARCHAR(20) NOT NULL UNIQUE );
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS wish;
+DROP TABLE IF EXISTS wishlist;
 
-CREATE TABLE IF NOT EXISTS Wishes(
-WISHES_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-WISH VARCHAR(15) NOT NULL UNIQUE );
+CREATE TABLE user (
+                      id INT AUTO_INCREMENT PRIMARY KEY,
+                      firstname VARCHAR(50) NOT NULL,
+                      username VARCHAR(50) NOT NULL,
+                      password VARCHAR(50) NOT NULL
+);
 
-CREATE TABLE IF NOT EXISTS WishList(
-ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-NAME VARCHAR(20) NOT NULL UNIQUE,
-DESCRIPTION VARCHAR(100),
-USER_ID INT,
-WISHES_ID INT,
-FOREIGN KEY (USER_ID) REFERENCES Users(USER_ID),
-FOREIGN KEY (WISHES_ID) REFERENCES Wishes(WISHES_ID) );
+CREATE TABLE wishlist (
+                          id INT UNIQUE NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                          user_id int,
+                          name VARCHAR(40) NOT NULL,
+                          description VARCHAR(255),
+                          FOREIGN KEY(user_id) REFERENCES user(id)
+);
 
-
-
--- Indsæt data i Users
-INSERT INTO Users (USERNAME) VALUES ('Berzan'), ('Ali');
-
--- Indsæt data i Wishes
-INSERT INTO Wishes (WISH) VALUES ('iPhone'), ('PlayStation');
-
--- Indsæt data i WishList
-INSERT INTO WishList (NAME, DESCRIPTION, USER_ID, WISHES_ID) VALUES
-('Holiday Gifts', 'Gifts for the holiday season', (SELECT USER_ID FROM Users WHERE USERNAME = 'Berzan'), (SELECT WISHES_ID FROM Wishes WHERE WISH = 'iPhone')),
-('Birthday Gifts', 'Gifts for upcoming birthdays', (SELECT USER_ID FROM Users WHERE USERNAME = 'Ali'), (SELECT WISHES_ID FROM Wishes WHERE WISH = 'PlayStation')),
-('Eid Gifts', 'Gifts for upcoming Eid days', (SELECT USER_ID FROM Users WHERE USERNAME = 'Joel'), (SELECT WISHES_ID FROM Wishes WHERE WISH = 'Real madrid shirt'));
+CREATE TABLE wish (
+                      id INT UNIQUE NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                      wishlist_id int,
+                      name VARCHAR(40) NOT NULL,
+                      price int(50) NOT NULL,
+                      description VARCHAR(50),
+                      FOREIGN KEY (wishlist_id) REFERENCES wishlist(id)
+);
 
 
-SELECT
-    WishList.NAME AS List_Name,
-    WishList.DESCRIPTION AS List_Description,
-    Users.USERNAME AS User_Name,
-    Wishes.WISH AS Wish_Item
-FROM
-    WishList
-    JOIN Users ON WishList.USER_ID = Users.USER_ID
-    JOIN Wishes ON WishList.WISHES_ID = Wishes.WISHES_ID;
+
+
+INSERT INTO user (firstname, username, password)
+VALUES
+    ('Ali', 'Ali17','A123'),
+    ('Berzan', 'HalaBerzan', 'Servuran'),
+    ('Joel', 'JoJo25', 'HowToMakeMoney');
+
+INSERT INTO wishlist (user_id, name, description)
+VALUES
+    (1,'julegaver', 'gaver jeg ønsker til gaven'),
+    (2,'eid gaver', 'gaver til eid');
+/* TEST DATA FOR WISHES */
+INSERT INTO wish (wishlist_id, name, description, price)
+VALUES
+    (1, 'Beaver',  'I want a cute beaver', 200),
+    (1, 'Goose', 'I want goose baby', 300),
+    (2, 'Justin Bieber','I want Justin biber, cause he´s cute!', 300),
+    (2, 'Rubber Duck', 'I need a coding buddy', 300);

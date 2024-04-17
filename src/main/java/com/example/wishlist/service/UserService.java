@@ -1,42 +1,32 @@
 package com.example.wishlist.service;
-import com.example.wishlist.model.User;
+
 import com.example.wishlist.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+@Service
+public class UserService {
 
-    @Service
-    public class UserService {
+    private final UserRepository userRepository;
 
-        private UserRepository userRepository;
-
-        @Autowired
-        public UserService(UserRepository userRepository) {
-            this.userRepository = userRepository;
-        }
-
-
-        //Koden implementere en ny brugere (CREATE)
-        public boolean addUser(User user) {
-            return userRepository.addUser(user);
-        }
-         /* koden bruges hvis man vil have alle brugere
-       public List<User> getAllUsers() {
-            return userRepository.getAllUsers();
-        }*/
-
-/*koden bruges kun hvis vi skal updater en bruger
-        public User updateUser(int id, User updatedUser) {
-            return userRepository.updateUser(id, updatedUser);
-        }
-*/
-
-/* koden bruges kun hvis vi skal slette en bruger
-        public void deleteUser(int id) {
-            userRepository.deleteUser(id);
-        }
-*/
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
+    public User registerUser(User user) {
+        // Først skal vi kontrollere, om brugernavnet allerede eksisterer
+        User existingUser = (User) userRepository.getUserByUsername(user.getUsername());
+        if (existingUser != null) {
+            // Brugernavnet eksisterer allerede, returner null for at angive, at registrering mislykkedes
+            return null;
+        }
 
+        // Brugernavnet er unikt, så opret brugeren i databasen
+        return (User) userRepository.createUser((com.example.wishlist.model.User) user);
+    }
+
+    public boolean loginUser(String username, String password) {
+        // Kalder login-metoden i UserRepository for at validere loginoplysninger
+        return userRepository.login(username, password);
+    }
+}

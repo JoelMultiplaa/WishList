@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Wish List</title>
+    <title>Edit Wishlist</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -24,19 +24,19 @@
 </head>
 <body>
 <div class="container">
-    <h1>Create Wishlist</h1>
-    <form action="/createwishlist" th:object="${wishlistObjekt}" method="post">
+    <h1>Edit Wishlist</h1>
+    <form action="/editwishlist/{wishlistId}" method="post">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name" th:required="required">
+            <input type="text" class="form-control" id="name" name="name" value="{existingName}" required>
         </div>
         <div class="form-group">
             <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="description" rows="4" th:required="required"></textarea>
+            <textarea class="form-control" id="description" name="description" rows="4" required>{existingDescription}</textarea>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Create Wishlist</button>
-            <a th:href="@{/wishlist_frontpage}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="/wishlist_frontpage" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>
