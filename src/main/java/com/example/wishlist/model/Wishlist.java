@@ -3,7 +3,7 @@ package com.example.wishlist.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WishList {
+public class Wishlist {
     private int wishListId;
     private String name;
     private String description;
@@ -11,7 +11,7 @@ public class WishList {
 
 
     // Constructor
-    public WishList(String name, String description, int wishListId) {
+    public Wishlist(String name, String description, int wishListId) {
 
         this.name = name;
         this.description = description;
@@ -20,7 +20,7 @@ public class WishList {
 
     }
 
-    public WishList() {
+    public Wishlist() {
 
     }
 
