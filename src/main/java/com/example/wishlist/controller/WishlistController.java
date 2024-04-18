@@ -1,5 +1,4 @@
 package com.example.wishlist.controller;
-import com.example.wishlist.model.Wish;
 import com.example.wishlist.model.Wishlist;
 import com.example.wishlist.service.WishlistService;
 import org.springframework.stereotype.Controller;
@@ -26,27 +25,30 @@ public class WishlistController {
         // Implementer logikken til at hente ønskelister fra backenden og sende dem til HTML-siden
         List<Wishlist> wishLists = wishlistService.getAllWishLists();
         model.addAttribute("wishLists", wishLists);
-        return "wishlist_frontpage"; //
+        return "wishlist_frontpage";
     }
 
     @GetMapping("/createwishlist")
     public String createWishListPage(Model model) {
-        model.addAttribute("wishList", new Wishlist());
-        return "createwishlist";
+        model.addAttribute("wishlistObject", new Wishlist());
+        return "createwishlist"; //denne del rammer vi endpointet så vi kommer på url
     }
 
     // Opret ønskeliste endpoint
     @PostMapping("/createwishlist")
-    public String createWishList(@ModelAttribute("wishList") Wishlist wishList) {
-        wishlistService.createWishList(wishList);
-        return "redirect:/wishlist_frontpage"; // Omdiriger til ønskeliste-siden efter oprettelse
+    public String createWishlist(@ModelAttribute("wishlistObject") Wishlist wishlist) {
+        System.out.println("test2" + wishlist);
+        //wishlistService.creteWishlist(wishlist);
+
+        return "redirect:/wishlist_frontpage";
     }
+
 
     // Slet ønskeliste endpoint
     @PostMapping("/deletewishlist/{id}")
     public String deleteWishList(@PathVariable("id") int id) {
         wishlistService.deleteWishList(id);
-        return "redirect:/wishlists_frontpage";
+        return "redirect:/wishlist_frontpage";
     }
 
 // Rediger ønskeliste side
@@ -58,11 +60,19 @@ public class WishlistController {
     }*/
 
     // Opdater ønskeliste endpoint
-    @PostMapping("/editwishlist/{id}")
-    public String updateWishList(@PathVariable("id") int id, @ModelAttribute("wishList") Wishlist updatedWishList) {
-        wishlistService.updateWishList(id, updatedWishList);
-        return "redirect:/wishlists";
+    @GetMapping("/editwishlist/{id}")
+    public String showEditWishlistPage(@PathVariable("id") int id, Model model) {
+        // Her kan du tilføje logik til at hente eksisterende ønskelisteoplysninger baseret på id
+        // F.eks. kan du bruge en service til at hente ønskelisten fra databasen baseret på id
+        Wishlist wishlist = wishlistService.getWishlistById(id);
+
+        // Tilføj ønskelisteoplysningerne til modelen, så de kan bruges i HTML-siden
+        model.addAttribute("wishlist", wishlist);
+
+        // Returner navnet på HTML-filen for at vise siden
+        return "editwishlist";
     }
+
 
     // Vis alle ønskelister endpoint
     @GetMapping("/wishlists")
