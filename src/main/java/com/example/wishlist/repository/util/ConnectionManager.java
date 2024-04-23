@@ -10,12 +10,12 @@ public class ConnectionManager {
     private ConnectionManager() {
     }
 
-    public static Connection getConnection(String url, String user_id, String user_pwd) {
+    public static Connection getConnection(String url, String uid, String user_pwd) {
 
         if (conn != null) return conn;
 
         try {
-            conn = DriverManager.getConnection(url, user_id, user_pwd);
+            conn = DriverManager.getConnection(url, uid, user_pwd);
 
         } catch (SQLException e) {
             System.out.println("Couldn't connect to db");

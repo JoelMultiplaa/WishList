@@ -1,6 +1,7 @@
 package com.example.wishlist.repository;
 
 import com.example.wishlist.model.User;
+import com.example.wishlist.repository.util.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +18,7 @@ public class UserRepository {
     private String url;
 
     @Value("${spring.datasource.username}")
-    private String admin_id;
+    private String uid;
 
     @Value("${spring.datasource.password}")
     private String user_pwd;
@@ -25,36 +26,28 @@ public class UserRepository {
 
 
     public User createUser(User newUser) {
-        try (Connection con = DriverManager.getConnection(url, admin_id, user_pwd)) {
-            String SQL = "INSERT INTO users (FIRSTNAME, USERNAME, PASSWORD) VALUES (?, ?, ?)";
-            PreparedStatement pstmt = con.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+         Connection conn = ConnectionManager.getConnection(url, uid, user_pwd); {
+            String SQL = "INSERT INTO user (FIRSTNAME, USERNAME, PASSWORD) VALUES (?, ?, ?)";
+           try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
             pstmt.setString(1, newUser.getFirstName());
             pstmt.setString(2, newUser.getUsername());
             pstmt.setString(3, newUser.getPassword());
 
-            int affectedRows = pstmt.executeUpdate();
+            return newUser;
 
-            if (affectedRows == 0) {
-                throw new SQLException("Creating user failed, no rows affected.");
-            }
-
-            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    newUser.setUser_id(generatedKeys.getInt(1));
-                } else {
-                    throw new SQLException("Creating user failed, no ID obtained.");
-                }
-            }
-
-        } catch (SQLException e) {
+             } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        return newUser;
     }
+}
+
+
+
+
+
 
     public boolean login(String username, String password) {
-        try (Connection con = DriverManager.getConnection(url, admin_id, user_pwd)) {
+        try (Connection con = DriverManager.getConnection(url, uid, user_pwd)) {
             String sql = "SELECT COUNT(*) FROM users WHERE username = ? AND password = ?";
             try (PreparedStatement pstmt = con.prepareStatement(sql)) {
                 pstmt.setString(1, username);
@@ -73,7 +66,7 @@ public class UserRepository {
     }
 
     public User getUserByUsername(String username) {
-        try (Connection con = DriverManager.getConnection(url, admin_id, user_pwd)) {
+        try (Connection con = DriverManager.getConnection(url, uid, user_pwd)) {
             String sql = "SELECT * FROM users WHERE username = ?";
             try (PreparedStatement pstmt = con.prepareStatement(sql)) {
                 pstmt.setString(1, username);
