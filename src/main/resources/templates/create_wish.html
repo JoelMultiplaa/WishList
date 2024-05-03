@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Wish</title>
+    <link rel="stylesheet" href="createwish.css">
+</head>
+<body>
+<div class="create-wish-container">
+    <h1>Create Wish</h1>
+    <form action="/create" method="post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
+        </div>
+        <button type="submit">Create</button>
+    </form>
+    <a href="/wishes">Back to Wishlist</a>
+</div>
+</body>
+</html>

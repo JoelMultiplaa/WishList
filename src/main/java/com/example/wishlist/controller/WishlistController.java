@@ -8,7 +8,7 @@ import java.util.List;
 
 @Controller
 public class WishlistController {
-    private WishlistService wishlistService;
+    private final WishlistService wishlistService;
 
     public WishlistController(WishlistService wishListService) {
         this.wishlistService = wishListService;
@@ -38,7 +38,7 @@ public class WishlistController {
     @PostMapping("/createwishlist")
     public String createWishlist(@ModelAttribute("wishlistObject") Wishlist wishlist) {
         System.out.println("test2" + wishlist);
-        //wishlistService.creteWishlist(wishlist);
+        wishlistService.creteWishlist(wishlist);
 
         return "redirect:/wishlist_frontpage";
     }

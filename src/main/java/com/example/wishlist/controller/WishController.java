@@ -1,6 +1,5 @@
 package com.example.wishlist.controller;
 import com.example.wishlist.model.Wish;
-import com.example.wishlist.model.Wishlist;
 import com.example.wishlist.service.WishService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +22,7 @@ public WishController (WishService wishService){
 @GetMapping("/createwish")
 public String createWishPage(Model model) {
     model.addAttribute("wish", new Wish());
-    return "createWish"; // Opret en side for oprettelse af ønske
+    return "create_wish"; // Opret en side for oprettelse af ønske
 }
 
 // Opret ønske endpoint
